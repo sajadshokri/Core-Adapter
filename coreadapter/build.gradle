@@ -1,11 +1,34 @@
 apply plugin: 'com.android.library'
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'CoreAdapter'
 
+    publishedGroupId = 'ir.coderz.coreadapter'
+    libraryName = 'CoreAdapter'
+    artifact = 'Core-Adapter'
+
+    libraryDescription = 'Core Adapter for recyclerview'
+
+    siteUrl = 'https://github.com/sajadshokri/Core-Adapter'
+    gitUrl = 'https://github.com/sajadshokri/Core-Adapter'
+
+    libraryVersion = '0.1.4'
+
+    developerId = 'sajadshokri'
+    developerName = 'Sajad Shokri'
+    developerEmail = 's.shokri@karinaco.com'
+
+    licenseName = 'The MIT License (MIT)'
+    licenseUrl = 'https://rem.mit-license.org/license.txt'
+    allLicenses = ["MIT"]
+
+}
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -22,3 +45,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.android.support:recyclerview-v7:+'
 }
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'

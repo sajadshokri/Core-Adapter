@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CoreAdapterSample.iml" filepath="$PROJECT_DIR$/CoreAdapterSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Core-Adapter.iml" filepath="$PROJECT_DIR$/Core-Adapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/coreadapter/coreadapter.iml" filepath="$PROJECT_DIR$/coreadapter/coreadapter.iml" />
     </modules>
