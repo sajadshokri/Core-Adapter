@@ -12,4 +12,4 @@ Support Any Type of items in recyclerview,
 
 
 ## add to project:
-`compile 'ir.coderz.coreadapter:Core-Adapter:0.1.4'`
+`compile 'ir.coderz.coreadapter:Core-Adapter:0.1.5'`
