@@ -1,6 +1,11 @@
 # Core-Adapter
 > Support Any Type of items in recyclerview with no pain 
 
+
+### add to project:
+`compile 'ir.coderz.coreadapter:Core-Adapter:0.1.6@aar'`
+
+
 ### Usage:
 
 #### 0. ViewHolders are normal:
@@ -60,5 +65,3 @@ coreAdapter.addItem(new TextItem());
 ```
 
 
-### add to project:
-`compile 'ir.coderz.coreadapter:Core-Adapter:0.1.6'`
