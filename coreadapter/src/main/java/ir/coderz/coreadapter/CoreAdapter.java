@@ -97,7 +97,7 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         int start = this.items.size() - 1;
         this.items.addAll(items);
         if(start>=0) {
-            notifyItemRangeInserted(start, this.items.size() - 1);
+            notifyItemRangeInserted(start, items.size());
         }else {
             notifyDataSetChanged();
         }
