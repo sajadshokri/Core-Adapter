@@ -96,7 +96,11 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public <T extends CoreItem> void addItems(@NonNull List<T> items) {
         int start = this.items.size() - 1;
         this.items.addAll(items);
-        notifyItemRangeInserted(start, this.items.size() - 1);
+        if(start>=0) {
+            notifyItemRangeInserted(start, this.items.size() - 1);
+        }else {
+            notifyDataSetChanged();
+        }
     }
 
     public <T extends CoreItem> void addItems(@IntRange(from = 0) int position, @NonNull List<T> items) {

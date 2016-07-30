@@ -61,4 +61,4 @@ coreAdapter.addItem(new TextItem());
 
 
 ### add to project:
-`compile 'ir.coderz.coreadapter:Core-Adapter:0.1.5'`
+`compile 'ir.coderz.coreadapter:Core-Adapter:0.1.6'`

@@ -12,7 +12,7 @@ ext {
     siteUrl = 'https://github.com/sajadshokri/Core-Adapter'
     gitUrl = 'https://github.com/sajadshokri/Core-Adapter'
 
-    libraryVersion = '0.1.5'
+    libraryVersion = '0.1.6'
 
     developerId = 'sajadshokri'
     developerName = 'Sajad Shokri'
@@ -45,7 +45,6 @@ ext {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$supportLibVersion"
     compile "com.android.support:recyclerview-v7:$supportLibVersion"
 }
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
