@@ -132,8 +132,8 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             for (int i=from;i<to;i++){
                 items.remove(i);
-                notifyItemRemoved(i);
             }
+            notifyDataSetChanged();
 
         }
     }
