@@ -126,7 +126,7 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    public <T extends CoreItem> void removeRangeOfItems(@IntRange(from = 0)int from,@IntRange int to) {
+    public void removeRangeOfItems(@IntRange(from = 0)int from,@IntRange int to) {
 
         if(items.size()>from && items.size()<=to){
 
