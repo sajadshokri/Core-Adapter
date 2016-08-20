@@ -3,7 +3,7 @@
 
 
 ### add to project:
-`compile 'ir.coderz.coreadapter:Core-Adapter:0.1.6@aar'`
+`compile 'ir.coderz.coreadapter:Core-Adapter:0.1.7@aar'`
 
 
 ### Usage:
