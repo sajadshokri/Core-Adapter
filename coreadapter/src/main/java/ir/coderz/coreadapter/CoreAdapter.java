@@ -93,12 +93,17 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
+    /**
+     * @param items
+     * @param <T>
+     * @see CoreItem
+     */
     public <T extends CoreItem> void addItems(@NonNull List<T> items) {
         int start = this.items.size() - 1;
         this.items.addAll(items);
-        if(start>=0) {
+        if (start >= 0) {
             notifyItemRangeInserted(start, items.size());
-        }else {
+        } else {
             notifyDataSetChanged();
         }
     }
@@ -111,11 +116,21 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyItemRangeInserted(position, items.size());
     }
 
+    /**
+     * @param item
+     * @param <T>
+     * @see CoreItem
+     */
     public <T extends CoreItem> void addItem(@NonNull T item) {
         items.add(item);
         notifyItemInserted(items.size() - 1);
     }
 
+    /**
+     * @param item
+     * @param <T>  extends CoreItem
+     * @see CoreItem
+     */
     public <T extends CoreItem> void removeItem(@NonNull T item) {
         int index = items.indexOf(item);
         if (index >= 0) {
@@ -126,11 +141,17 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     }
 
-    public void removeRangeOfItems(@IntRange(from = 0)int from,@IntRange int to) {
+    /**
+     * remove items
+     *
+     * @param start
+     * @param end
+     */
+    public void removeItemRange(@IntRange(from = 0) int start, @IntRange(from = 0) int end) {
 
-        if(items.size()>from && items.size()>to){
+        if (start < items.size() && end < items.size()) {
 
-            for (int i=from;i<to;i++){
+            for (int i = start; i < end; i++) {
                 items.remove(i);
             }
             notifyDataSetChanged();
@@ -143,7 +164,7 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * adding an item to a position
      *
      * @param position insert position
-     * @param item input item
+     * @param item     input item
      */
     public <T extends CoreItem> void addItem(@IntRange(from = 0) int position, @NonNull T item) {
         if (position > items.size()) {
