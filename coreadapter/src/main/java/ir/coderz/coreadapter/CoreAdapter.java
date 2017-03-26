@@ -149,7 +149,7 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     public void removeItemRange(@IntRange(from = 0) int start, @IntRange(from = 0) int end) {
 
-        if (start < items.size() && end < items.size()) {
+        if (start < items.size() && end <= items.size()) {
 
             for (int i = start; i < end; i++) {
                 items.remove(i);
