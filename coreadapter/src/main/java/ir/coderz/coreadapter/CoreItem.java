@@ -14,6 +14,4 @@ public interface CoreItem<T extends RecyclerView.ViewHolder, E> {
     int getLayout();
 
     E getData();
-
-
 }
