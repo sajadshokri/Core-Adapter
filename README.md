@@ -43,7 +43,7 @@ recycler.setAdapter(ghostAdapter);
 ```
 #### 3. Fill the adapter by core items:
 ```java
-coreAdapter.addItem(new TextItem());
+ghostAdapter.addItem(new TextItem());
 ```
 
 
