@@ -12,7 +12,7 @@ ext {
     siteUrl = 'https://github.com/sajadshokri/Core-Adapter'
     gitUrl = 'https://github.com/sajadshokri/Core-Adapter'
 
-    libraryVersion = '0.1.8'
+    libraryVersion = '0.1.9'
 
     developerId = 'sajadshokri'
     developerName = 'Sajad Shokri'
@@ -24,14 +24,14 @@ ext {
 
 }
 android {
-    compileSdkVersion 24
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 24
-        versionCode 3
-        versionName "0.1.8"
+        targetSdkVersion 25
+        versionCode 2
+        versionName "0.1.9"
     }
     buildTypes {
         release {
@@ -41,7 +41,7 @@ android {
     }
 }
 ext {
-    supportLibVersion = '24.1.1'
+    supportLibVersion = '25.3.0'
 }
 
 dependencies {

@@ -11,17 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.coderz.coreadapter.CoreAdapter;
-import ir.coderz.coreadapter.CoreItem;
-import ir.coderz.coreadaptersample.viewtypes.AnotherHolder;
 import ir.coderz.coreadaptersample.viewtypes.AnotherItem;
-import ir.coderz.coreadaptersample.viewtypes.TextHolder;
 import ir.coderz.coreadaptersample.viewtypes.TextItem;
 
 public class MainActivity extends AppCompatActivity implements AnotherItem.OnItemClickListener {
 
     RecyclerView recycler;
     CoreAdapter coreAdapter = new CoreAdapter();
-    List<CoreItem> coreItems = new ArrayList<>();
+    List<Object> coreItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +27,8 @@ public class MainActivity extends AppCompatActivity implements AnotherItem.OnIte
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        coreAdapter.putViewType(R.layout.text_item, TextHolder.class);
-//        coreAdapter.putViewType(R.LAYOUT.another_layout, AnotherHolder.class);
+//        coreAdapter.putViewType(R.layout.text_item, TextHolder.class);
+//        coreAdapter.putViewType(R.layout.another_layout, AnotherHolder.class);
 
         recycler.setAdapter(coreAdapter);
 

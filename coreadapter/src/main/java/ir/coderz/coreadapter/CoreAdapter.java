@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,26 +19,52 @@ import java.util.List;
  * Created by sajad on 6/30/16.
  */
 public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    List<CoreItem> items = new ArrayList<>();
+    List<Object> items = new ArrayList<>();
     HashMap<Integer, Class<? extends RecyclerView.ViewHolder>> viewTypes = new HashMap<>();
     private LayoutInflater layoutInflater;
 
-    public CoreAdapter(final HashMap<Integer, Class<? extends RecyclerView.ViewHolder>> viewTypes) {
-        this.viewTypes = viewTypes;
-
-    }
+//    public CoreAdapter(final HashMap<Integer, Class<? extends RecyclerView.ViewHolder>> viewTypes) {
+//        this.viewTypes = viewTypes;
+//
+//    }
 
     private void readAnnotations(AnnotatedElement element) {
         if (element.isAnnotationPresent(BindItem.class)) {
             BindItem bindItem = element.getAnnotation(BindItem.class);
-            putViewType(bindItem.LAYOUT(), bindItem.VIEW_HOLDER());
+            putViewType(bindItem.layout(), bindItem.holder());
+        } else {
+            throw new IllegalStateException("items should be annotated with BindItem");
         }
     }
 
-    public CoreAdapter(@LayoutRes int layout, Class<? extends RecyclerView.ViewHolder> holder) {
-        this.viewTypes = new HashMap<>();
-        this.viewTypes.put(layout, holder);
+    private int readLayout(AnnotatedElement element) {
+        if (element.isAnnotationPresent(BindItem.class)) {
+            BindItem bindItem = element.getAnnotation(BindItem.class);
+            return bindItem.layout();
+        } else {
+            throw new IllegalStateException("items should be annotated with BindItem");
+        }
     }
+
+    private void bind( RecyclerView.ViewHolder holder, Object o) {
+        Class c = o.getClass();
+        for (Method method : c.getMethods()) {
+            if (method.isAnnotationPresent(Binder.class)) {
+                try {
+                    method.invoke(o,holder);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+//
+//    public CoreAdapter(@LayoutRes int layout, Class<? extends RecyclerView.ViewHolder> holder) {
+//        this.viewTypes = new HashMap<>();
+//        this.viewTypes.put(layout, holder);
+//    }
 
     public CoreAdapter() {
     }
@@ -75,7 +102,8 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        items.get(position).bind(holder);
+        bind(holder,items.get(position));
+//        items.get(position).bind(holder);
     }
 
     @Override
@@ -85,16 +113,16 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return items.get(position).getLayout();
+        return readLayout(items.get(position).getClass());//.getLayout();
     }
 
     /**
      * @param items CoreAdapter uses these items and bind recycler to them
      */
-    public <T extends CoreItem> void setItems(@NonNull List<T> items) {
+    public <T > void setItems(@NonNull List<T> items) {
         this.items.clear();
         this.items.addAll(items);
-        for (CoreItem item : items) {
+        for (T item : items) {
             readAnnotations(item.getClass());
         }
         notifyDataSetChanged();
@@ -108,12 +136,12 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     /**
      * @param items
      * @param <T>
-     * @see CoreItem
+     *
      */
-    public <T extends CoreItem> void addItems(@NonNull List<T> items) {
+    public <T> void addItems(@NonNull List<T> items) {
         int start = this.items.size() - 1;
         this.items.addAll(items);
-        for (CoreItem item : items) {
+        for (T item : items) {
             readAnnotations(item.getClass());
         }
         if (start >= 0) {
@@ -123,12 +151,12 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public <T extends CoreItem> void addItems(@IntRange(from = 0) int position, @NonNull List<T> items) {
+    public <T> void addItems(@IntRange(from = 0) int position, @NonNull List<T> items) {
         if (position > items.size()) {
             throw new IndexOutOfBoundsException();
         }
         this.items.addAll(position, items);
-        for (CoreItem item : items) {
+        for (T item : items) {
             readAnnotations(item.getClass());
         }
         notifyItemRangeInserted(position, items.size());
@@ -137,9 +165,8 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     /**
      * @param item
      * @param <T>
-     * @see CoreItem
      */
-    public <T extends CoreItem> void addItem(@NonNull T item) {
+    public <T> void addItem(@NonNull T item) {
         items.add(item);
         readAnnotations(item.getClass());
 
@@ -149,9 +176,8 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     /**
      * @param item
      * @param <T>  extends CoreItem
-     * @see CoreItem
      */
-    public <T extends CoreItem> void removeItem(@NonNull T item) {
+    public <T> void removeItem(@NonNull T item) {
         int index = items.indexOf(item);
         if (index >= 0) {
             items.remove(index);
@@ -169,7 +195,7 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     public void removeItemRange(@IntRange(from = 0) int start, @IntRange(from = 0) int end) {
 
-        if (start < items.size() && end < items.size()) {
+        if (start < items.size() && end <= items.size()) {
 
             for (int i = start; i < end; i++) {
                 items.remove(i);
@@ -186,7 +212,7 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * @param position insert position
      * @param item     input item
      */
-    public <T extends CoreItem> void addItem(@IntRange(from = 0) int position, @NonNull T item) {
+    public <T> void addItem(@IntRange(from = 0) int position, @NonNull T item) {
         if (position > items.size()) {
             throw new IndexOutOfBoundsException();
         }
