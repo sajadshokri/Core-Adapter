@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,8 +22,16 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     HashMap<Integer, Class<? extends RecyclerView.ViewHolder>> viewTypes = new HashMap<>();
     private LayoutInflater layoutInflater;
 
-    public CoreAdapter(HashMap<Integer, Class<? extends RecyclerView.ViewHolder>> viewTypes) {
+    public CoreAdapter(final HashMap<Integer, Class<? extends RecyclerView.ViewHolder>> viewTypes) {
         this.viewTypes = viewTypes;
+
+    }
+
+    private void readAnnotations(AnnotatedElement element) {
+        if (element.isAnnotationPresent(BindItem.class)) {
+            BindItem bindItem = element.getAnnotation(BindItem.class);
+            putViewType(bindItem.LAYOUT(), bindItem.VIEW_HOLDER());
+        }
     }
 
     public CoreAdapter(@LayoutRes int layout, Class<? extends RecyclerView.ViewHolder> holder) {
@@ -85,6 +94,9 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public <T extends CoreItem> void setItems(@NonNull List<T> items) {
         this.items.clear();
         this.items.addAll(items);
+        for (CoreItem item : items) {
+            readAnnotations(item.getClass());
+        }
         notifyDataSetChanged();
     }
 
@@ -101,6 +113,9 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public <T extends CoreItem> void addItems(@NonNull List<T> items) {
         int start = this.items.size() - 1;
         this.items.addAll(items);
+        for (CoreItem item : items) {
+            readAnnotations(item.getClass());
+        }
         if (start >= 0) {
             notifyItemRangeInserted(start, items.size());
         } else {
@@ -113,6 +128,9 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             throw new IndexOutOfBoundsException();
         }
         this.items.addAll(position, items);
+        for (CoreItem item : items) {
+            readAnnotations(item.getClass());
+        }
         notifyItemRangeInserted(position, items.size());
     }
 
@@ -123,6 +141,8 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      */
     public <T extends CoreItem> void addItem(@NonNull T item) {
         items.add(item);
+        readAnnotations(item.getClass());
+
         notifyItemInserted(items.size() - 1);
     }
 
@@ -171,6 +191,8 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             throw new IndexOutOfBoundsException();
         }
         items.add(position, item);
+        readAnnotations(item.getClass());
+
         notifyItemInserted(position);
     }
 }

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements AnotherItem.OnIte
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
         coreAdapter.putViewType(R.layout.text_item, TextHolder.class);
-        coreAdapter.putViewType(R.layout.another_layout, AnotherHolder.class);
+//        coreAdapter.putViewType(R.LAYOUT.another_layout, AnotherHolder.class);
 
         recycler.setAdapter(coreAdapter);
 

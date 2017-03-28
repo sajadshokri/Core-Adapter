@@ -1,7 +1,9 @@
 package ir.coderz.coreadaptersample.viewtypes;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import ir.coderz.coreadapter.BindItem;
 import ir.coderz.coreadapter.CoreItem;
 import ir.coderz.coreadaptersample.AnotherModel;
 import ir.coderz.coreadaptersample.R;
@@ -9,7 +11,8 @@ import ir.coderz.coreadaptersample.R;
 /**
  * Created by sajad on 6/30/16.
  */
-public class AnotherItem implements CoreItem<AnotherHolder, AnotherModel> {
+@BindItem(LAYOUT = R.layout.another_layout, VIEW_HOLDER = AnotherHolder.class, MODEL = AnotherModel.class)
+public class AnotherItem implements CoreItem{
     AnotherModel anotherModel;
     OnItemClickListener onItemClickListener;
 
@@ -18,7 +21,8 @@ public class AnotherItem implements CoreItem<AnotherHolder, AnotherModel> {
     }
 
     @Override
-    public void bind(AnotherHolder viewHolder) {
+    public void bind(RecyclerView.ViewHolder rviewHolder) {
+        AnotherHolder viewHolder = (AnotherHolder) rviewHolder;
         viewHolder.getText().setText(anotherModel.getText());
         viewHolder.getButton().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +48,7 @@ public class AnotherItem implements CoreItem<AnotherHolder, AnotherModel> {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
 
         void itemClick(View v, AnotherModel data);
     }
