@@ -1,4 +1,4 @@
-package ir.coderz.coreadapter;
+package ir.coderz.ghostadapter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

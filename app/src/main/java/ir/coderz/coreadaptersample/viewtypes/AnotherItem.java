@@ -2,8 +2,8 @@ package ir.coderz.coreadaptersample.viewtypes;
 
 import android.view.View;
 
-import ir.coderz.coreadapter.Binder;
-import ir.coderz.coreadapter.BindItem;
+import ir.coderz.ghostadapter.Binder;
+import ir.coderz.ghostadapter.BindItem;
 import ir.coderz.coreadaptersample.AnotherModel;
 import ir.coderz.coreadaptersample.R;
 

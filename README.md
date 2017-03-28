@@ -3,7 +3,7 @@
 
 
 ### add to project:
-`compile 'ir.coderz.coreadapter:Core-Adapter:0.1.9@aar'`
+`compile 'ir.coderz.ghostadapter:GhostAdapter:0.1'@aar`
 
 
 ### Usage:
@@ -26,40 +26,22 @@ public class TextHolder extends RecyclerView.ViewHolder {
 ```
 
 
-#### 1. Items must implement `CoreItem<YOUR_VIEW_HOLDER,YOUR_DATA_MODEL>`
+#### 1. Items must be annotated
 ```java
-public class TextItem implements CoreItem<TextHolder, String> {
-
-    @Override
+@BindItem(layout = R.layout.layout, holder = Holder.class)
+public class TextItem {  
+    @Binder
     public void bind(TextHolder textHolder) {
-        // This is the onbind method used to be inside adapter
-        textHolder.getTextView().setText(textHolder.getAdapterPosition() + "");
-    }
-
-    @Override
-    public int getLayout() {
-        // You must return the related layout
-        return R.layout.text_item;
-    }
-
-    @Override
-    public String getData() {
-        // you might need the data! so return it here :)
-        return textHolder.getAdapterPosition() + "";
     }
 }
 ```
 
-#### 2. Use `CoreAdapter` for Recyclerviews adapter
+#### 2. Use `GhostAdapter` for Recyclerviews adapter
 ```java
-CoreAdapter coreAdapter = new CoreAdapter();
-recycler.setAdapter(coreAdapter);
+GhostAdapter ghostAdapter = new GhostAdapter();
+recycler.setAdapter(ghostAdapter);
 ```
-
-#### 3. what layout for what viewholder? 
-` coreAdapter.putViewType(R.layout.YOUR_LAYOUT, YOUR_HOLDER.class);`
-
-#### 4. Fill the adapter by core items:
+#### 3. Fill the adapter by core items:
 ```java
 coreAdapter.addItem(new TextItem());
 ```

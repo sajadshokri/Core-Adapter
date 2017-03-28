@@ -1,7 +1,7 @@
 package ir.coderz.coreadaptersample.viewtypes;
 
-import ir.coderz.coreadapter.Binder;
-import ir.coderz.coreadapter.BindItem;
+import ir.coderz.ghostadapter.Binder;
+import ir.coderz.ghostadapter.BindItem;
 import ir.coderz.coreadaptersample.R;
 
 /**

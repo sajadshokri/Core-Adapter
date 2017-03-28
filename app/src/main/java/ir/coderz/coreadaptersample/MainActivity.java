@@ -10,14 +10,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.coderz.coreadapter.CoreAdapter;
+import ir.coderz.ghostadapter.GhostAdapter;
 import ir.coderz.coreadaptersample.viewtypes.AnotherItem;
 import ir.coderz.coreadaptersample.viewtypes.TextItem;
 
 public class MainActivity extends AppCompatActivity implements AnotherItem.OnItemClickListener {
 
     RecyclerView recycler;
-    CoreAdapter coreAdapter = new CoreAdapter();
+    GhostAdapter coreAdapter = new GhostAdapter();
     List<Object> coreItems = new ArrayList<>();
 
     @Override

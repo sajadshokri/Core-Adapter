@@ -1,4 +1,4 @@
-package ir.coderz.coreadapter;
+package ir.coderz.ghostadapter;
 
 import android.support.annotation.IntRange;
 import android.support.annotation.LayoutRes;
@@ -18,12 +18,12 @@ import java.util.List;
 /**
  * Created by sajad on 6/30/16.
  */
-public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class GhostAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<Object> items = new ArrayList<>();
     HashMap<Integer, Class<? extends RecyclerView.ViewHolder>> viewTypes = new HashMap<>();
     private LayoutInflater layoutInflater;
 
-//    public CoreAdapter(final HashMap<Integer, Class<? extends RecyclerView.ViewHolder>> viewTypes) {
+//    public GhostAdapter(final HashMap<Integer, Class<? extends RecyclerView.ViewHolder>> viewTypes) {
 //        this.viewTypes = viewTypes;
 //
 //    }
@@ -61,12 +61,12 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 //
-//    public CoreAdapter(@LayoutRes int layout, Class<? extends RecyclerView.ViewHolder> holder) {
+//    public GhostAdapter(@LayoutRes int layout, Class<? extends RecyclerView.ViewHolder> holder) {
 //        this.viewTypes = new HashMap<>();
 //        this.viewTypes.put(layout, holder);
 //    }
 
-    public CoreAdapter() {
+    public GhostAdapter() {
     }
 
     public void putViewType(@LayoutRes int layout, Class<? extends RecyclerView.ViewHolder> holder) {
@@ -117,7 +117,7 @@ public class CoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     /**
-     * @param items CoreAdapter uses these items and bind recycler to them
+     * @param items GhostAdapter uses these items and bind recycler to them
      */
     public <T > void setItems(@NonNull List<T> items) {
         this.items.clear();
