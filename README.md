@@ -1,9 +1,9 @@
-# Core-Adapter
+# Ghost-Adapter
 > Support Any Type of items in recyclerview with no pain 
 
 
 ### add to project:
-`compile 'ir.coderz.ghostadapter:GhostAdapter:0.1'@aar`
+`compile 'ir.coderz.ghostadapter:GhostAdapter:0.1@aar'`
 
 
 ### Usage:
