@@ -28,7 +28,7 @@ public class TextHolder extends RecyclerView.ViewHolder {
 
 #### 1. Items must be annotated
 ```java
-@BindItem(layout = R.layout.layout, holder = Holder.class)
+@BindItem(layout = R.layout.layout, holder = TextHolder.class)
 public class TextItem {  
     @Binder
     public void bind(TextHolder textHolder) {
