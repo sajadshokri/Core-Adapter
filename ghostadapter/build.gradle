@@ -12,7 +12,7 @@ ext {
     siteUrl = 'https://github.com/sajadshokri/Core-Adapter'
     gitUrl = 'https://github.com/sajadshokri/Core-Adapter'
 
-    libraryVersion = '0.1'
+    libraryVersion = '0.2'
 
     developerId = 'sajadshokri'
     developerName = 'Sajad Shokri'
